@@ -39,4 +39,34 @@
 <!--      </plugin>-->
 <!--    </plugins>-->
 <!--  </build>-->
+<build>
+  <plugins>
+    <plugin>
+      <!-- Build an executable JAR -->
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-jar-plugin</artifactId>
+      <version>3.1.0</version>
+      <configuration>
+        <archive>
+          <manifest>
+            <addClasspath>true</addClasspath>
+            <classpathPrefix>lib/</classpathPrefix>
+            <mainClass>com.androzes.elevator.App</mainClass>
+          </manifest>
+        </archive>
+      </configuration>
+    </plugin>
+<!--      <plugin>-->
+<!--        <groupId>org.apache.maven.plugins</groupId>-->
+<!--        <artifactId>maven-surefire-plugin</artifactId>-->
+<!--        <version>2.12.1</version>-->
+<!--        <configuration>-->
+<!--          <includes>-->
+<!--            <include>com.androzes.elevator.ElevatorTestSuite</include>-->
+<!--            <include>com.androzes.elevator.ElevatorTest</include>-->
+<!--          </includes>-->
+<!--        </configuration>-->
+<!--      </plugin>-->
+  </plugins>
+</build>
 </project>
