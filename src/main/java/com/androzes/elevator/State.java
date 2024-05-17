@@ -3,5 +3,7 @@ package com.androzes.elevator;
 public enum State {
 	IDLE,
 	MOVING,
-	STOPPED;
+	DOOR_OPENING,
+	DOOR_CLOSING,
+	WAITING;
 }

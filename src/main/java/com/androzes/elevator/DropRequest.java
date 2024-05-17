@@ -1,13 +1,17 @@
 package com.androzes.elevator;
 
 public class DropRequest {
-    int destFloor;
+    int dropFloor;
 
     public DropRequest(int destFloor) {
-        this.destFloor = destFloor;
+        this.dropFloor = destFloor;
     }
 
-    public int getDestinationFloor() {
-        return destFloor;
+    public int getDropFloor() {
+        return dropFloor;
+    }
+
+    public String toString() {
+        return "D(" + getDropFloor() + ")";
     }
 }

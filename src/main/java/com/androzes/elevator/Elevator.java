@@ -4,6 +4,8 @@ import java.util.TreeSet;
 
 public class Elevator {
 
+	public static final int MAX_FLOORS = 10;
+
 	public static final int TIME_MOVE_FLOOR = 1000;
 	public static final int TIME_DOOR_OPEN = 500;
 	public static final int TIME_DOOR_CLOSE = 500;
@@ -129,7 +131,7 @@ public class Elevator {
 			// if stops are empty, sleep for x seconds
 			if (requests.isEmpty()) {
 				currentState = State.IDLE;
-				System.out.println("Nowhere to go. Elevator waiting at " + currentFloor);
+				drawElevator();
 				Thread.sleep(moveFloorTime);
 				continue;
 			}
@@ -197,8 +199,9 @@ public class Elevator {
 		System.out.println("Moving " + currentFloor + " -> " + floor);
 
 		if (floor == currentFloor) {
-			currentState = State.STOPPED;
-			System.out.println("Already at floor " + currentFloor);
+			currentState = State.WAITING;
+			//System.out.println("Already at floor " + currentFloor);
+			drawElevator();
 			return;
 		}
 
@@ -208,7 +211,8 @@ public class Elevator {
 			for (int i = currentFloor + 1; i <= floor; i++) {
 				Thread.sleep(moveFloorTime);
 				currentFloor = i;
-				System.out.println("Reached floor " + currentFloor);
+				drawElevator();
+				//System.out.println("Reached floor " + currentFloor);
 			}
 		} else {
 			currentDirection = Direction.DOWN;
@@ -216,20 +220,21 @@ public class Elevator {
 			for (int i = currentFloor - 1; i >= floor; i--) {
 				Thread.sleep(moveFloorTime);
 				currentFloor = i;
-				System.out.println("Reached floor " + currentFloor);
+				drawElevator();
+				//System.out.println("Reached floor " + currentFloor);
 			}
 		}
 	}
 
 	public void openDoor() throws InterruptedException {
-		currentState = State.STOPPED;
+		currentState = State.WAITING;
 		System.out.println("Opening Door at floor " + currentFloor);
 		Thread.sleep(doorOpenTime);
 		
 	}
 
 	public void closeDoor() throws InterruptedException {
-		currentState = State.STOPPED;
+		currentState = State.WAITING;
 		System.out.println("Closing Door at floor " + currentFloor);
 		Thread.sleep(doorCloseTime);
 	}
@@ -247,8 +252,8 @@ public class Elevator {
 	}
 
 	public void addRequest(Request request) {
-		requests.add(request.getPickupRequest().getSourceFloor());
-		requests.add(request.getDropRequest().getDestinationFloor());
+		requests.add(request.getPickupRequest().getFloor());
+		requests.add(request.getDropRequest().getDropFloor());
 	}
 
 	public boolean isIdle() {
@@ -269,6 +274,26 @@ public class Elevator {
 		} else {
 			currentDirection = Direction.UP;
 		}
+	}
+
+	public void drawElevator() {
+		System.out.println("");
+
+		StringBuilder sb = new StringBuilder();
+		StringBuilder fl = new StringBuilder();
+		for(int i=0; i<=MAX_FLOORS; i++) {
+			fl.append(String.format("%2d ", i));
+			if (i == currentFloor) {
+				sb.append("xx");
+			} else {
+				sb.append("--");
+			}
+			sb.append(" ");
+		}
+
+		System.out.println(fl.toString());
+		System.out.println(sb.toString());
+		
 	}
 
 }

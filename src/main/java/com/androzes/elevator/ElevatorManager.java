@@ -3,6 +3,7 @@ package com.androzes.elevator;
 import java.util.TreeSet;
 
 public class ElevatorManager {
+
 	
 	Elevator elevator;
 
@@ -88,7 +89,7 @@ public class ElevatorManager {
 	private void addUpRequest(Request request) {
 		PickRequest pickupRequest = request.getPickupRequest();
 		if (pickupRequest.getDirection() == Direction.UP) {
-			if (pickupRequest.getSourceFloor() >= elevator.getCurrentFloor() && !elevator.isMoving()) {
+			if (pickupRequest.getFloor() >= elevator.getCurrentFloor() && !elevator.isMoving()) {
 				System.out.println("Add request " + request + " to elevator");
 				elevator.addRequest(request);
 			} else {
@@ -104,7 +105,7 @@ public class ElevatorManager {
 	private void addDownRequest(Request request) {
 		PickRequest pickupRequest = request.getPickupRequest();
 		if (pickupRequest.getDirection() == Direction.DOWN) {
-			if (pickupRequest.getSourceFloor() <= elevator.getCurrentFloor() && !elevator.isMoving()) {
+			if (pickupRequest.getFloor() <= elevator.getCurrentFloor() && !elevator.isMoving()) {
 				System.out.println("Add request " + request + " to elevator");
 				elevator.addRequest(request);
 			} else {
@@ -126,5 +127,7 @@ public class ElevatorManager {
 		System.out.println("Drop at " + destFloor);
 		elevator.dropRequest(destFloor);
 	}
+
+	
 
 }

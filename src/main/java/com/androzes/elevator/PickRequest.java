@@ -13,7 +13,7 @@ public class PickRequest {
         return direction;
     }
 
-    public int getSourceFloor() {
+    public int getFloor() {
         return sourceFloor;
     }
 
@@ -23,5 +23,9 @@ public class PickRequest {
 
     public void setDirection(Direction direction) {
         this.direction = direction;
+    }
+
+    public String toString() {
+        return "P(" + getFloor() + "," + getDirection().name() + ")";
     }
 }

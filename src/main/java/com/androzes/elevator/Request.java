@@ -26,11 +26,10 @@ public class Request implements Comparable<Request>{
     }
 
     public int compareTo(Request other) {
-        return this.pickupRequest.getSourceFloor() - other.getPickupRequest().getSourceFloor();
+        return this.pickupRequest.getFloor() - other.getPickupRequest().getFloor();
     }
 
     public String toString() {
-        return "[ P(" + pickupRequest.getSourceFloor()+","+pickupRequest.getDirection().name()+")"+
-                ", D("+dropRequest.getDestinationFloor()+") ]";
+        return "[ " + pickupRequest + ", " + dropRequest + " ]";
     }
 }
